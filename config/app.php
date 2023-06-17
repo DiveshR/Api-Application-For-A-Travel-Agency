@@ -31,6 +31,9 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+
+    'currency' => env('DEFAULT_CURRENCY', '₹'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
