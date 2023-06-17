@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Travel extends Model
 {
-    use HasFactory,Sluggable;
+    use HasFactory,Sluggable, HasUuids;
 
     protected $fillable = [
         'is_public',
@@ -41,7 +42,7 @@ class Travel extends Model
     public function getNumberOfNights(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, $attributes) => $attributes['number_of_days'] -1
+            get: fn ($value, $attributes) => $attributes['number_of_days'] - 1
         );
     }
 
