@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\TravelController;
 use App\Http\Controllers\Api\v1\TourController;
 use App\Http\Controllers\Api\v1\Admin\TravelController as AdminTravelController;
+use App\Http\Controllers\Api\v1\Admin\TourController as AdminTourController;
 use App\Http\Controllers\Api\v1\Auth\AuthController;
 
 
@@ -24,7 +25,9 @@ Route::apiResource('v1/travels/{travel:slug}/tours', TourController::class);
 
 Route::prefix('v1/admin')->middleware(['auth:sanctum','role:admin'])->group( function(){
 
-    Route::apiResource('travels', AdminTravelController::class);
+    Route::apiResource('travels', AdminTravelController::class)->parameters(['travels' => 'travel:slug']);
+    
+    Route::apiResource('travels/{travel:slug}/tours', AdminTourController::class);
 
 });
 

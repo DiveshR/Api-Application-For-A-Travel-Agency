@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Api\v1\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\Api\v1\TravelRequest;
-use App\Http\Resources\Api\v1\TravelResource;
 use App\Models\Travel;
+use App\Http\Requests\Api\v1\TourRequest;
+use App\Http\Resources\Api\v1\TourResource;
 
-class TravelController extends Controller
+class TourController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,10 +21,11 @@ class TravelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TravelRequest $request)
+    public function store(Travel $travel, TourRequest $request)
     {
-        $travel = Travel::create($request->validated());
-        return new TravelResource($travel);
+       $tour =  $travel->tours()->create($request->validated());
+        
+        return new TourResource($tour);
     }
 
     /**
@@ -38,13 +39,9 @@ class TravelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Travel $travel, TravelRequest $request)
+    public function update(Request $request, string $id)
     {
-        $travel->slug = null;
-        $travel->update($request->validated());
-        
-        return new TravelResource($travel);
-
+        //
     }
 
     /**
